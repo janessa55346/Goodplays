@@ -79,7 +79,7 @@ app.get('/friends', async (req, res) => {
 app.post('/add-friend', async (req, res) => {
     const { player1_id, player2_id } = req.body;
     try {
-        await db.query(`INSERT INTO Friends (initiated_by, date_added) VALUES (?, NOW());`, [player1_id]);
+        await db.query(`INSERT INTO Friends (initiated_by, friend_id, date_added) VALUES (?, ?, NOW());`,[player1_id, player2_id]);
         res.redirect('/friends');
     } catch (error) {
         console.error("Error adding friend:", error);
